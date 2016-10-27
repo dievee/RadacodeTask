@@ -56,23 +56,18 @@ namespace RadacodeTask.Controllers
         //    return PartialView(data);
         //}
 
-        public PartialViewResult Vote(int ideaId, bool up)
+        public ActionResult Vote(int ideaId, bool isUp)  //
         {
             Idea idea = repository.Ideas.Where(i => i.Id == ideaId).Single();
-            //if (up)
-            //{
-            //    idea.Rating += 1;
-            //}
-            //else
-            //{
-            //    idea.Rating -= 1;
-            //}
-            return PartialView(idea.Rating);
-        }
-
-        public void VoteDown(int ideaId)
-        {
-
+            if (isUp)
+            {
+                idea.Rating += 1;
+            }
+            else
+            {
+                idea.Rating -= 1;
+            }
+            return PartialView(idea); //
         }
     }
 }
