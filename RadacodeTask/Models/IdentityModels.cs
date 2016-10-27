@@ -25,6 +25,8 @@ namespace RadacodeTask.Models
         {
         }
 
+        public DbSet<Idea> Ideas { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

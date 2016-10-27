@@ -1,0 +1,29 @@
+﻿@model RadacodeTask.Models.IdeaListViewModel
+
+@{
+    ViewBag.Title = "Ideas";
+
+
+}
+<style>
+    .page {
+        display: inline-block;
+    }
+</style>
+
+@foreach (var i in Model.Ideas)
+{
+    @Html.Partial("IdeaTemplate", i)
+}
+@if(@Model.PagingInfo.TotalItems != 0)
+{ 
+    if (@Model.PagingInfo.CurrentPage > 1)
+    { <a class="page" href="@Url.Action("List", new { page = Model.PagingInfo.CurrentPage-1 })"> @( @Model.PagingInfo.CurrentPage - 1 ) </a>}
+    <p class="page">@Model.PagingInfo.CurrentPage</p>
+    if (@Model.PagingInfo.TotalPages != @Model.PagingInfo.CurrentPage)
+    { <a class="page" href="@Url.Action("List", new { page = Model.PagingInfo.CurrentPage+1 })"> @( @Model.PagingInfo.CurrentPage + 1 )  </a>}
+}
+else
+{
+ <p>There are no ideas yet. @Html.ActionLink("Add your idea.", "Add") </p>
+}

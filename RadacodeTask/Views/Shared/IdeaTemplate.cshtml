@@ -1,0 +1,37 @@
+﻿@model RadacodeTask.Models.Idea
+@{ 
+    AjaxOptions ajaxOpts = new AjaxOptions { UpdateTargetId = "rating" };
+}
+
+
+<div>
+    <h3>@Model.Title</h3>
+    <h4>@Model.Description</h4>
+    <h4 id="rating">@*@Model.Rating.ToString()*@
+        @Html.Action("Vote", new { ideaId = Model.Id, up = true })
+        
+    </h4>
+    <a href="@Url.Action("VoteUp", new { ideaId = Model.Id })">+</a>
+    <a href="@Url.Action("VoteDown", new { ideaId = Model.Id })">-</a>
+
+    @using (Ajax.BeginForm("VoteUp", ajaxOpts))
+    {
+        @Html.HiddenFor(i => i.Id)
+        <button type="submit">Vote Up</button>
+    }
+</div> 
+
+@*@using (Html.BeginForm("VoteUp", "Idea"))
+{   <div>            
+        @Html.HiddenFor(x => x.Id)            
+        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)            
+        <input type="submit" class="btn" value="voteup" />        
+    </div>    
+}
+@using (Html.BeginForm("VoteDown", "Idea"))
+{   <div>
+        @Html.HiddenFor(x => x.Id)
+        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+        <input type="submit" class="btn " value="votedown" />
+    </div>
+}*@
